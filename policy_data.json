@@ -1,0 +1,91 @@
+{
+    "important_data_values": {
+        "report_date": "2025年8月底",
+        "total_capacity": "36.9",
+        "total_capacity_yoy": "18.0",
+        "hydro_capacity": "12.0",
+        "hydro_yoy": "15.0",
+        "thermal_capacity": "15.6",
+        "thermal_yoy": "5.0",
+        "nuclear_capacity": "2.8",
+        "nuclear_yoy": "3.5",
+        "solar_capacity": "10.5",
+        "solar_yoy": "48.5",
+        "wind_capacity": "8.1",
+        "wind_yoy": "22.1",
+        "market_trade": "3.59",
+        "market_trade_yoy": "3.2",
+        "provincial_trade": "2.73",
+        "provincial_trade_yoy": "1.6",
+        "cross_region_trade": "8.55",
+        "cross_region_trade_yoy": "9",
+        "green_trade": "1.82",
+        "green_trade_yoy": "42.1",
+        "society_usage": "10.15",
+        "society_usage_yoy": "5.0",
+        "primary_usage": "1.01",
+        "primary_usage_yoy": "10.6",
+        "secondary_usage": "4.34",
+        "secondary_usage_yoy": "3.1",
+        "tertiary_usage": "13.30",
+        "tertiary_usage_yoy": "7.7"
+    },
+    "gov_policies": [
+        {
+            "title": "电力市场计量结算基本规则",
+            "agency": "国家发展改革委、国家能源局",
+            "date": "2025年07月18日",
+            "summary": "深化电力体制改革、推进全国统一电力市场体系建设，解决各地计量结算标准不一、流程割裂问题"
+        },
+        {
+            "title": "关于深化提升“获得电力”服务水平全面打造现代化用电营商环境的意见",
+            "agency": "国家发展改革委、国家能源局",
+            "date": "2025年05月16日",
+            "summary": "提出2029年实现“五化”目标（办电便捷化、供电高质化、用电绿色化、服务普惠化、监管协同化），降低企业办电成本"
+        }
+    ],
+    "energy_new_policies": {
+        "电力交易新政": [
+            {
+                "region": "宁夏",
+                "title": "关于完善市场交易和价格机制的通知",
+                "date": "2025年6月1日",
+                "summary": "宁夏发改委发布深化新能源上网电价市场化改革方案，完善现货和中长期市场交易规则，明确存量增量项目机制电量比例"
+            },
+            {
+                "region": "浙江",
+                "title": "浙江电力现货市场运行方案",
+                "date": "2024年5月1日",
+                "summary": "浙江电力现货市场转入连续结算试运行阶段，火电、水电、核电、新能源等发电主体参与市场，抽蓄电站和用户侧以报量不报价方式参与"
+            }
+        ],
+        "区域电价政策": [
+            {
+                "region": "四川",
+                "title": "关于进一步优化分时电价机制的通知",
+                "date": "2025年8月20日",
+                "summary": "明确低谷调峰市场独立储能、虚拟电厂报价不上浮分档，规定调频里程申报价格上限等，完善分时电价机制"
+            }
+        ],
+        "重点开发政策": [
+            {
+                "region": "国家",
+                "title": "关于有序推动绿电直连发展有关事项的通知",
+                "date": "2025年6月",
+                "summary": "国家层面明确新能源可通过专用线路与单一用户直连，不接入公共电网，要求直连用户整体新能源自发自用比例不低于60%"
+            }
+        ]
+    },
+    "references": [
+        {
+            "source": "国家能源局",
+            "title": "国家能源局发布2025年1-8月份全国电力工业统计数据，风光装机约17亿千瓦",
+            "url": "https://www.nea.gov.cn/20250823/example1.html"
+        },
+        {
+            "source": "中国政府网",
+            "title": "2025年8月份全社会用电量再破万亿，同比增长5.0%",
+            "url": "https://www.gov.cn/lianbo/bumen/202509/example2.htm"
+        }
+    ]
+}
