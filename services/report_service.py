@@ -1,5 +1,6 @@
 import json
 import logging
+import math
 import os
 import re
 import tempfile
@@ -86,19 +87,69 @@ def build_rag_chunks_from_texts(file_texts: list[dict[str, str]]):
     return rag_chunks
 
 
+def build_vector_index(rag_chunks):
+    if not rag_chunks:
+        return {"idf": {}, "chunks": []}
+
+    doc_freq = {}
+    tokenized_chunks = []
+    for chunk in rag_chunks:
+        tokens = tokenize_for_rag(chunk.get("content", ""))
+        tokenized_chunks.append(tokens)
+        for token in set(tokens):
+            doc_freq[token] = doc_freq.get(token, 0) + 1
+
+    n_docs = len(rag_chunks)
+    idf = {tok: math.log((n_docs + 1) / (df + 1)) + 1 for tok, df in doc_freq.items()}
+
+    indexed_chunks = []
+    for chunk, tokens in zip(rag_chunks, tokenized_chunks):
+        tf = {}
+        for token in tokens:
+            tf[token] = tf.get(token, 0) + 1
+        total = max(1, len(tokens))
+
+        vec = {}
+        for token, count in tf.items():
+            vec[token] = (count / total) * idf.get(token, 0.0)
+
+        norm = math.sqrt(sum(v * v for v in vec.values()))
+        indexed_chunks.append({**chunk, "vec": vec, "norm": norm})
+
+    return {"idf": idf, "chunks": indexed_chunks}
+
+
 def retrieve_rag_context(query, rag_chunks, top_k=3):
     if not rag_chunks:
         return ""
-    query_tokens = set(tokenize_for_rag(query))
+
+    vector_index = build_vector_index(rag_chunks)
+    chunks = vector_index.get("chunks", [])
+    idf = vector_index.get("idf", {})
+
+    query_tokens = tokenize_for_rag(query)
     if not query_tokens:
         return ""
 
+    q_tf = {}
+    for token in query_tokens:
+        q_tf[token] = q_tf.get(token, 0) + 1
+    q_total = max(1, len(query_tokens))
+
+    q_vec = {t: (c / q_total) * idf.get(t, 0.0) for t, c in q_tf.items()}
+    q_norm = math.sqrt(sum(v * v for v in q_vec.values()))
+    if q_norm == 0:
+        return ""
+
     scored = []
-    for chunk in rag_chunks:
-        chunk_tokens = set(tokenize_for_rag(chunk["content"]))
-        overlap = len(query_tokens & chunk_tokens)
-        if overlap > 0:
-            scored.append((overlap, chunk))
+    for chunk in chunks:
+        dot = 0.0
+        for token, q_val in q_vec.items():
+            dot += q_val * chunk["vec"].get(token, 0.0)
+        if dot <= 0 or chunk["norm"] == 0:
+            continue
+        sim = dot / (q_norm * chunk["norm"])
+        scored.append((sim, chunk))
 
     scored.sort(key=lambda x: x[0], reverse=True)
     return "\n".join([f"[来源: {item['source']}] {item['content']}" for _, item in scored[:top_k]])
