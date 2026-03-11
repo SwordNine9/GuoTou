@@ -1,0 +1,10 @@
+{
+  "chart_anchor": "（一）全国电力供应数据",
+  "sections": [
+    {"title": "二、政府文件", "json_path": "gov_policies", "content_type": "policy"},
+    {"title": "一、电力交易新政", "json_path": "energy_new_policies.电力交易新政", "content_type": "energy"},
+    {"title": "二、区域电价政策", "json_path": "energy_new_policies.区域电价政策", "content_type": "energy"},
+    {"title": "三、重点开发政策", "json_path": "energy_new_policies.重点开发政策", "content_type": "energy"},
+    {"title": "参考资料", "json_path": "references", "content_type": "reference"}
+  ]
+}
